@@ -6,7 +6,7 @@ $input_file = 'filename_here'
 $output_width  = 320
 $output_height = 240
 const $info = 'info.ini'
-
+ 
 
 ;metadata
 $command = 'ffprobe -v error -show_format -show_streams ' & $input_file
