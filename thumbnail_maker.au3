@@ -11,13 +11,13 @@ const $info = 'info.ini'
 ;metadata
 $command = 'ffprobe -v error -show_format -show_streams ' & $input_file
 runwait(@ComSpec & ' /c ' & $command & ' > info.ini', '', @SW_HIDE)
-$ini_width  	= IniRead($info, 'stream', 'width', null)			; horizontal resolution	>	out_resolution
-$ini_height 	= IniRead($info, 'stream', 'height', null)			; vertical resolution	>	^
-$ini_duration	= IniRead($info, 'stream', 'duration', null)		; time in seconds		>	out_duration
-$ini_fps		= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
-$ini_name		= IniRead($info, 'format', 'filename', null)		; filename				>	...
-$ini_size		= IniRead($info, 'format', 'size', null)			; filesize in bytes		>	out_size
-$ini_date		= FileGetTime($input_file, 0)						; last modified			>	out_date
+$ini_width  	= IniRead($info, 'stream', 'width', null)		; horizontal resolution	>	out_resolution
+$ini_height 	= IniRead($info, 'stream', 'height', null)		; vertical resolution	>	^
+$ini_duration	= IniRead($info, 'stream', 'duration', null)		; time in seconds	>	out_duration
+$ini_fps	= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
+$ini_name	= IniRead($info, 'format', 'filename', null)		; filename		>	...
+$ini_size	= IniRead($info, 'format', 'size', null)		; filesize in bytes	>	out_size
+$ini_date	= FileGetTime($input_file, 0)				; last modified		>	out_date
 
 
 ;format time
@@ -95,12 +95,12 @@ $out_fps = stringformat("%.2f", $out_fps)
 $header_font 	  = 'courier-new'
 $header_font_size = 16
 $header_file      = 'header.png'
-$header_text      = 'filename   : ' & $ini_name 			& '\n' _
-				  & 'filesize   : ' & $out_size & $out_size_meta	& '\n' _
-				  & 'resolution : ' & $out_resolution 	& '\n' _
-				  & 'duration   : ' & $out_duration		& '\n' _
-			      & 'fps        : ' & $out_fps 			& '\n' _
-			      & 'modified   : ' & $out_date
+$header_text      = 'filename   : ' & $ini_name	& '\n' _
+			& 'filesize   : ' & $out_size & $out_size_meta	& '\n' _
+			& 'resolution : ' & $out_resolution 	& '\n' _
+			& 'duration   : ' & $out_duration	& '\n' _
+			& 'fps        : ' & $out_fps 		& '\n' _
+			& 'modified   : ' & $out_date
 $command = 'convert -background black -fill white -font ' & $header_font & ' -pointsize ' & $header_font_size & ' label:"' & $header_text & '" ' & $header_file
 clipput($command)
 runwait(@ComSpec & ' /c ' & $command & '', '', @SW_HIDE)
