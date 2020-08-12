@@ -29,7 +29,7 @@ if stringlen($time[2]) = 1 then $time[2] = '0' & $time[2]
 $out_duration = $time[0] & ':' & $time[1] & ':' & $time[2]
 ;msgbox(1,'duration', $out_duration)
 
-
+ 
 ;format date
 local $date[6] = $ini_date
 switch int($ini_date[1]);month
