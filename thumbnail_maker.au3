@@ -2,63 +2,40 @@
 #include <Date.au3>
 #include <AutoItConstants.au3>
 
-$input_file = 'filename_here'
-$output_width  = 320
-$output_height = 240
+$input_file = 'enter filename'
+$output_width  = 240	;320x240 - 240x135 - ?
+$output_height = 135
 const $info = 'info.ini'
- 
 
-;metadata
+
+;video data
 $command = 'ffprobe -v error -show_format -show_streams ' & $input_file
 runwait(@ComSpec & ' /c ' & $command & ' > info.ini', '', @SW_HIDE)
-$ini_width  	= IniRead($info, 'stream', 'width', null)		; horizontal resolution	>	out_resolution
-$ini_height 	= IniRead($info, 'stream', 'height', null)		; vertical resolution	>	^
-$ini_duration	= IniRead($info, 'stream', 'duration', null)		; time in seconds	>	out_duration
-$ini_fps	= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
-$ini_name	= IniRead($info, 'format', 'filename', null)		; filename		>	...
-$ini_size	= IniRead($info, 'format', 'size', null)		; filesize in bytes	>	out_size
-$ini_date	= FileGetTime($input_file, 0)				; last modified		>	out_date
+$ini_width  	= IniRead($info, 'stream', 'width', null)			; horizontal resolution	>	out_resolution
+$ini_height 	= IniRead($info, 'stream', 'height', null)			; vertical resolution	>	^
+$ini_duration	= IniRead($info, 'stream', 'duration', null)			; time in seconds	>	out_duration
+$ini_fps		= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
+$ini_name		= IniRead($info, 'format', 'filename', null)		; filename		>	ini_name
+$ini_size		= IniRead($info, 'format', 'size', null)		; filesize in bytes	>	out_size
+$ini_date		= FileGetTime($input_file, 0)				; last modified		>	out_date
 
 
 ;format time
-local $time[3]
-_TicksToTime(int($ini_duration) * 1000, $time[0], $time[1], $time[2])
-if stringlen($time[0]) = 1 then $time[0] = '0' & $time[0]
-if stringlen($time[1]) = 1 then $time[1] = '0' & $time[1]
-if stringlen($time[2]) = 1 then $time[2] = '0' & $time[2]
-$out_duration = $time[0] & ':' & $time[1] & ':' & $time[2]
-;msgbox(1,'duration', $out_duration)
+$out_duration = timestamp($ini_duration)
+func timestamp($seconds)
+   local $time[3]
+   _TicksToTime(int($seconds) * 1000, $time[0], $time[1], $time[2])
+   if stringlen($time[0]) = 1 then $time[0] = '0' & $time[0]
+   if stringlen($time[1]) = 1 then $time[1] = '0' & $time[1]
+   if stringlen($time[2]) = 1 then $time[2] = '0' & $time[2]
+   return $time[0] & ':' & $time[1] & ':' & $time[2]
+   ;msgbox(1,'duration', $out_duration)
+endfunc
 
- 
+
 ;format date
-local $date[6] = $ini_date
-switch int($ini_date[1]);month
-   case 1
-	  $date[1] = 'Jan'
-   case 2
-	  $date[1] = 'Feb'
-   case 3
-	  $date[1] = 'Mar'
-   case 4
-	  $date[1] = 'Apr'
-   case 5
-	  $date[1] = 'May'
-   case 6
-	  $date[1] = 'Jun'
-   case 7
-	  $date[1] = 'Jul'
-   case 8
-	  $date[1] = 'Aug'
-   case 9
-	  $date[1] = 'Sep'
-   case 10
-	  $date[1] = 'Oct'
-   case 11
-	  $date[1] = 'Nov'
-   case 12
-	  $date[1] = 'Dec'
-endswitch
-$out_date = $date[1] & ' ' & $date[2] & ', ' & $date[0] & ', ' & $date[3] & ':' & $date[4] & ':' & $date[5]
+local $month[12] = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+$out_date = $month[$ini_date[1] - 1] & ' ' & $ini_date[2] & ', ' & $ini_date[0] & ', ' & $ini_date[3] & ':' & $ini_date[4] & ':' & $ini_date[5]
 ;msgbox(1,'last modified', $out_date)
 
 
@@ -92,62 +69,90 @@ $out_fps = stringformat("%.2f", $out_fps)
 
 
 ;create metadata header using imagemagick
-$header_font 	  = 'courier-new'
-$header_font_size = 16
-$header_file      = 'header.png'
-$header_text      = 'filename   : ' & $ini_name	& '\n' _
-			& 'filesize   : ' & $out_size & $out_size_meta	& '\n' _
-			& 'resolution : ' & $out_resolution 	& '\n' _
-			& 'duration   : ' & $out_duration	& '\n' _
-			& 'fps        : ' & $out_fps 		& '\n' _
-			& 'modified   : ' & $out_date
+;text labels
+$header_font 	  = 'Arial'
+$header_font_size = 12
+$header_file      = 'header1.png'
+$header_text      = 'File name   '	& '\n' _
+		& 'File size   '	& '\n' _
+		& 'Resolution  '	& '\n' _
+		& 'Duration    '	;& '\n' _
+;		& ' fps        : '	& '\n' _
+;		& ' modified   : '
 $command = 'convert -background black -fill white -font ' & $header_font & ' -pointsize ' & $header_font_size & ' label:"' & $header_text & '" ' & $header_file
 clipput($command)
 runwait(@ComSpec & ' /c ' & $command & '', '', @SW_HIDE)
+;text data
+$header_file      = 'header2.png'
+$header_text      = ':  ' & $ini_name		& '\n' _
+		& ':  ' & $out_size & $out_size_meta	& '\n' _
+		& ':  ' & $out_resolution	& '\n' _
+		& ':  ' & $out_duration		;& '\n' _
+;		& ':  ' & $out_fps		& '\n' _
+;		& ':  ' & $out_date
+$command = 'convert -background black -fill white -font ' & $header_font & ' -pointsize ' & $header_font_size & ' label:"' & $header_text & '" ' & $header_file
+clipput($command)
+runwait(@ComSpec & ' /c ' & $command & '', '', @SW_HIDE)
+;combine the label and data and make border around it
+msgbox(1,'','pause')
+$command = 'convert header1.png header2.png +append header.png'
+runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
+$command = 'convert header.png -bordercolor black -border 4x4 header.png'
+runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
 
 
-;create the 9 thumbnails of the video
+
+;create the 9 snapshots of the video
 for $i = 0  to 8
+   ;get snapshot
    $time = int($ini_duration * ($i / 8))
-   $output_file = $i + 1 & '.jpg'
+   $output_file = $i + 1 & '.png'
    $command = 'ffmpeg -ss ' & $time & ' -i ' & $input_file & ' -s ' & $output_width & 'x' & $output_height & ' -frames:v 1 ' & $output_file
+   runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
+   ;add border around snapshot
+   $command = 'convert ' & $output_file & ' -bordercolor black -border 1x1 ' & $output_file
+   runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
+
+   ;add timestamp to bottom right
+   $time_watermark = timestamp($time)
+   $command = 'convert ' & $output_file & ' -gravity southeast -stroke black -pointsize 14 -strokewidth 2 -annotate 0 ' & $time_watermark & ' -stroke none -pointsize 14 -fill white -annotate 0 ' & $time_watermark & ' ' & $output_file
    runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
 next
 
 
-;combine the thumbnails together
-$command = 'convert 1.jpg 2.jpg 3.jpg +append a.jpg'
+;combine the snapshots together
+$command = 'convert 1.png 2.png 3.png +append a.png'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
-
-$command = 'convert 4.jpg 5.jpg 6.jpg +append b.jpg'
+$command = 'convert 4.png 5.png 6.png +append b.png'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
-
-$command = 'convert 7.jpg 8.jpg 9.jpg +append c.jpg'
+$command = 'convert 7.png 8.png 9.png +append c.png'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
-
-$command = 'convert a.jpg b.jpg c.jpg -append mosaic.jpg'
+$command = 'convert a.png b.png c.png -append mosaic.png'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
 
 
 ;combine header and thumbnails
 $output_file = 'result.jpg'
-$command = 'convert header.png mosaic.jpg -append result.jpg'
+$command = 'convert header.png mosaic.png -append result.jpg'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
 
 
-FileDelete("1.jpg")
-FileDelete("2.jpg")
-FileDelete("3.jpg")
-FileDelete("4.jpg")
-FileDelete("5.jpg")
-FileDelete("6.jpg")
-FileDelete("7.jpg")
-FileDelete("8.jpg")
-FileDelete("9.jpg")
-FileDelete("a.jpg")
-FileDelete("b.jpg")
-FileDelete("c.jpg")
-FileDelete("mosaic.jpg")
+;cleanup all the garbage
+FileDelete("1.png")
+FileDelete("2.png")
+FileDelete("3.png")
+FileDelete("4.png")
+FileDelete("5.png")
+FileDelete("6.png")
+FileDelete("7.png")
+FileDelete("8.png")
+FileDelete("9.png")
+FileDelete("a.png")
+FileDelete("b.png")
+FileDelete("c.png")
+FileDelete("mosaic.png")
 FileDelete("header.png")
+FileDelete("header1.png")
+FileDelete("header2.png")
 FileDelete("info.ini")
 exit
