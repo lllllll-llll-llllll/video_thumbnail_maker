@@ -80,7 +80,6 @@ $header_text      = 'File name   '	& '\n' _
 ;		& ' fps        : '	& '\n' _
 ;		& ' modified   : '
 $command = 'convert -background black -fill white -font ' & $header_font & ' -pointsize ' & $header_font_size & ' label:"' & $header_text & '" ' & $header_file
-clipput($command)
 runwait(@ComSpec & ' /c ' & $command & '', '', @SW_HIDE)
 ;text data
 $header_file      = 'header2.png'
@@ -91,7 +90,6 @@ $header_text      = ':  ' & $ini_name		& '\n' _
 ;		& ':  ' & $out_fps		& '\n' _
 ;		& ':  ' & $out_date
 $command = 'convert -background black -fill white -font ' & $header_font & ' -pointsize ' & $header_font_size & ' label:"' & $header_text & '" ' & $header_file
-clipput($command)
 runwait(@ComSpec & ' /c ' & $command & '', '', @SW_HIDE)
 ;combine the label and data and make border around it
 msgbox(1,'','pause')
