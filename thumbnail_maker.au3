@@ -11,13 +11,13 @@ const $info = 'info.ini'
 ;video data
 $command = 'ffprobe -v error -show_format -show_streams ' & $input_file
 runwait(@ComSpec & ' /c ' & $command & ' > info.ini', '', @SW_HIDE)
-$ini_width  	= IniRead($info, 'stream', 'width', null)			; horizontal resolution	>	out_resolution
-$ini_height 	= IniRead($info, 'stream', 'height', null)			; vertical resolution	>	^
-$ini_duration	= IniRead($info, 'stream', 'duration', null)			; time in seconds	>	out_duration
-$ini_fps		= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
-$ini_name		= IniRead($info, 'format', 'filename', null)		; filename		>	ini_name
-$ini_size		= IniRead($info, 'format', 'size', null)		; filesize in bytes	>	out_size
-$ini_date		= FileGetTime($input_file, 0)				; last modified		>	out_date
+$ini_width  	= IniRead($info, 'stream', 'width', null)		; horizontal resolution	>	out_resolution
+$ini_height 	= IniRead($info, 'stream', 'height', null)		; vertical resolution	>	^
+$ini_duration	= IniRead($info, 'stream', 'duration', null)		; time in seconds	>	out_duration
+$ini_fps	= IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
+$ini_name	= IniRead($info, 'format', 'filename', null)		; filename		>	ini_name
+$ini_size	= IniRead($info, 'format', 'size', null)		; filesize in bytes	>	out_size
+$ini_date	= FileGetTime($input_file, 0)				; last modified		>	out_date
 
 
 ;format time
