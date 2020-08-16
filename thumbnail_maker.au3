@@ -24,8 +24,8 @@ $ini_ratio      = 	 IniRead($info, 'stream', 'display_aspect_ratio', null)	; asp
 $ini_width  	= number(IniRead($info, 'stream', 'width', null))		; horizontal resolution	>	out_resolution
 $ini_height 	= number(IniRead($info, 'stream', 'height', null))		; vertical resolution	>	^
 $ini_duration	= number(IniRead($info, 'stream', 'duration', null))		; time in seconds	>	out_duration
-$ini_fps	= 	 IniRead($info, 'stream', 'avg_frame_rate', null)		; average frame rate	>	out_fps
-$ini_name	= 	 IniRead($info, 'format', 'filename', null)			; filename		>	...
+$ini_fps	= 	 IniRead($info, 'stream', 'avg_frame_rate', null)	; average frame rate	>	out_fps
+$ini_name	= 	 IniRead($info, 'format', 'filename', null)		; filename		>	...
 $ini_size	= number(IniRead($info, 'format', 'size', null))		; filesize in bytes	>	out_size
 $ini_date	= FileGetTime($input_file, 0)					; last modified		>	out_date
 
