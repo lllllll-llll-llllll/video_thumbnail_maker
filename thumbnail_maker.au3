@@ -106,7 +106,7 @@ local $montage[$config_rows * $config_columns]
 for $i = 1 to ubound($montage)
    $montage[$i - 1] = $i & '.png'
 next
-$command = 'montage ' & _ArrayToString($montage, ' ') & ' -geometry +2+2  -background black -tile ' & $config_columns & 'x' & $config_rows & ' mosaic.png'
+$command = 'montage ' & _ArrayToString($montage, ' ') & ' -geometry +' & $config_border & '+' & $config_border & ' -background black -tile ' & $config_columns & 'x' & $config_rows & ' mosaic.png'
 runwait(@ComSpec & " /c " & $command, "", @SW_HIDE)
 
 $command = 'convert header1.png header2.png +append -bordercolor black -border 4x4 header.png mosaic.png -append ' & $config_output
