@@ -56,7 +56,7 @@ select
    case $ini_size >= 1024	;kilobytes
 	  $out_size = ($ini_size / 1024)	& ' KB'
    case else   ;  <  1024	bytes
-	  $out_size = $ini_size				& ' B'
+	  $out_size = $ini_size			& ' B'
 endselect
 $out_size = stringformat("%.2f", $out_size)
 
