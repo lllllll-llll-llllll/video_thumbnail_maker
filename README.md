@@ -10,6 +10,7 @@ example usage calling script directly:
 resulting thumbnails.png output:  
 ![output result](https://raw.githubusercontent.com/lllllll-llll-llllll/video_thumbnail_maker/master/examples/thumbnails.png)  
   
+**parameter info**  
 `input` (input, in, i)  
 required  
 video file you wish to process.  
