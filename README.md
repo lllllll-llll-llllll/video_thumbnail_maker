@@ -20,7 +20,7 @@ filename and image format for the resulting output.
 all image formats supported by imagemagick work.  
 run `identify -list format` to see image formats.  
   
-`columns` (columns, column, cols, col, c)
+`columns` (columns, column, cols, col, c)  
 optional - defaults to `4`  
 any number other than 0.  
 number of columns of thumbnails.  
