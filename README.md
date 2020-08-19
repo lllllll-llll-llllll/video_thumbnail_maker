@@ -30,7 +30,7 @@ any number other than 0.
 number of columns of thumbnails.  
   
 `rows` (rows, row, r) 
-optional - defaults to `3` 
+optional - defaults to `3`  
 any number other than 0.  
 number of columns of thumbnails.  
   
