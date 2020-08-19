@@ -52,6 +52,7 @@ the font size to use for any text or numbers.
 optional - defaults to `Name, Size, Resolution, Duration`  
 additonal information about the video that will be displayed at the top of the image.  
 can be `name`, `size`, `resolution`, `duration`, `fps`, `date`. `none` means no header.  
+the ordering is maintained. can show the same information more than once.  
   
 `timestamp` (timestamp, time, ts, t)  
 optional - defaults to `southeast`  
