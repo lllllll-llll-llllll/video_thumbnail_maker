@@ -3,10 +3,10 @@ requires ffmpeg and imagemagick installed
   
   
 **example usage calling executable:**    
-`thumbnail_maker.exe "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "font_size=12" "header=name,size,resolution,duration,date" "time=southeast"`  
+`thumbnail_maker.exe "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "fontsize=12" "header=name,size,resolution,duration,date" "time=southeast"`  
 
 **example usage calling script directly:**    
-`AutoIt3.exe thumbnail_maker.au3 "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "font_size=12" "header=name,size,resolution,duration,date" "time=southeast"`  
+`AutoIt3.exe thumbnail_maker.au3 "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "fontsize=12" "header=name,size,resolution,duration,date" "time=southeast"`  
   
 **example output:**  
 ![output result](https://raw.githubusercontent.com/lllllll-llll-llllll/video_thumbnail_maker/master/examples/thumbnails.png)  
