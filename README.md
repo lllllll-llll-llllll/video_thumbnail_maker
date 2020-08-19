@@ -1,4 +1,4 @@
-autoit script to make thumbnails of video  
+autoit CLI tool to make thumbnails of video  
 requires ffmpeg and imagemagick installed  
   
   
