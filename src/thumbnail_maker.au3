@@ -103,9 +103,9 @@ if $config_rows 	= null then $config_rows	= 3
 if $config_size 	= null then $config_size	= 135
 if $config_border	= null then $config_border	= 1
 if $config_font 	= null then $config_font	= 'arial'
-if $config_fontsize = null then $config_fontsize	= 12
+if $config_fontsize	= null then $config_fontsize	= 12
 if $config_header 	= null then $config_header[4]	= ['name', 'size', 'resolution', 'duration']
-if $config_timestamp= null then $config_timestamp	= 'southeast'
+if $config_timestamp	= null then $config_timestamp	= 'southeast'
 
 
 ;metadata
