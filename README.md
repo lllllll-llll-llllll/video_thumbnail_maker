@@ -6,4 +6,4 @@ example usage:
 `video_thumbnails.exe "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "font_size=12" "header=name,size,resolution,duration,date" "time=southeast"`  
   
 resulting thumbnails.png output:  
-![output result](https://raw.githubusercontent.com/lllllll-llll-llllll/video_thumbnail_maker/master/examples/result5.png)  
+![output result](https://raw.githubusercontent.com/lllllll-llll-llllll/video_thumbnail_maker/master/examples/thumbnail.png)  
