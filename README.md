@@ -1,7 +1,7 @@
 autoit script to make thumbnails of videos, uses ffmpeg and imagemagick  
 the number of rows, columns, gap between cells, cell sizing, font, and font sizing can be modified  
   
-**example usage when calling executable:**    
+**example usage calling executable:**    
 `thumbnail_maker.exe "input=Big_Buck_Bunny.mp4" "output=thumbnails.png" "columns=4" "rows=3" "size=135" "border=1" "font=arial" "font_size=12" "header=name,size,resolution,duration,date" "time=southeast"`  
 
 **example usage calling script directly:**    
