@@ -2,15 +2,15 @@
 #include <Date.au3>
 #include <AutoItConstants.au3>
 
-   $config_input		= null
-   $config_output		= null
-   $config_columns		= null
-   $config_rows			= null
-   $config_size			= null
-   $config_border		= null
-   $config_font			= null
-   $config_fontsize		= null
-   $config_header		= null
+   $config_input	= null
+   $config_output	= null
+   $config_columns	= null
+   $config_rows		= null
+   $config_size		= null
+   $config_border	= null
+   $config_font		= null
+   $config_fontsize	= null
+   $config_header	= null
    $config_timestamp	= null
 
 for $i = 1 to $cmdline[0]
