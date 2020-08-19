@@ -213,7 +213,7 @@ endif
 
 
 
-;create the 9 thumbnails of the video
+;create thumbnails of the video
 $config_height = ($ini_width > $ini_height) ? $config_size : int($ini_height / ($ini_width / $config_size))
 $config_width  = ($ini_width > $ini_height) ? int($ini_width / ($ini_height / $config_size)) : $config_size
 for $i = 0  to (($config_rows * $config_columns) - 1)
