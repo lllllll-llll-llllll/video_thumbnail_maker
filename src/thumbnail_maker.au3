@@ -169,7 +169,6 @@ $out_fps = stringformat("%.2f", $out_fps)
 local $header_text1 = ''
 local $header_text2 = ''
 if $config_header <> 'none' then
-   _arraydisplay($config_header)
    for $item in $config_header
 	  select
 	  case ($item = 'name') or ($item = 'n')
