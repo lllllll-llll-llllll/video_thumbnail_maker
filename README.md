@@ -31,7 +31,7 @@ any number other than 0.
 number of columns of thumbnails.  
   
 `size` (size, s)  
-optional - defaults to 135  
+optional - defaults to `135`  
 horizontal aspect: max height in pixels for thumbnails.  
 portrait aspect: max width in pixels for thumbnails.  
   
